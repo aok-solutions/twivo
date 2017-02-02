@@ -1,20 +1,12 @@
 import Vue from 'vue'
-import App from './components/App.vue'
-import Login from './components/Login.vue'
 import Feed from './components/Feed.vue'
-import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  routes: [
-    { path: '/login', component: Login },
-    { path: 'feed', component: Feed }
-  ]
-})
+export const lock = new Auth0Lock(
+  'EIhU9jVy0uIxD43R7Bkp2EfgTMNJN4B3',
+  'ayanga.auth0.com'
+)
 
 new Vue({
   el: '#app',
-  router,
-  render: h => h(App)
+  render: h => h(Feed)
 })
