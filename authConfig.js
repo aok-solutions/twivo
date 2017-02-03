@@ -1,0 +1,2 @@
+var AUTH0_CLIENT_ID = 'EIhU9jVy0uIxD43R7Bkp2EfgTMNJN4B3';
+var AUTH0_DOMAIN = 'ayanga.auth0.com'
