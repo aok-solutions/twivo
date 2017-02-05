@@ -1,8 +1,15 @@
 <template>
   <div class="col-sm-4 col-sm-offset-4">
     <h1>Twivo Feed</h1>
-    <button class="btn btn-primary" @click="login()" v-show="!authenticated">Log In</button>
-    <button class="btn btn-danger" @click="logout()" v-show="authenticated">Log Out</button>
+    <div>
+      <button class="btn btn-primary" @click="login()" v-show="!authenticated">Log In</button>
+      <button class="btn btn-danger" @click="logout()" v-show="authenticated">Log Out</button>
+    </div>
+
+    <div class="col-sm-4" v-show="authenticated">
+      <h1>{{user.screenName}}</h1>
+      <img v-bind:src="user.picture">
+    </div>
   </div>
 </template>
 
@@ -13,7 +20,11 @@
     data() {
       return {
         authenticated: false,
-        lock: lock
+        lock: lock,
+        user: {
+          screenName: "",
+          picture: ""
+        }
       }
     },
     mounted(){
@@ -30,6 +41,10 @@
           }
 
           localStorage.setItem('profile', JSON.stringify(profile));
+
+          console.log(JSON.stringify(profile));
+          this.user.screenName = profile.screenName;
+          this.user.picture = profile.picture;
           this.authenticated = true;
         });
       });
@@ -47,6 +62,9 @@
       logout() {
         localStorage.removeItem('idToken');
         localStorage.removeItem('profile');
+
+        this.user.screenName = "";
+        this.user.picture = "";
         this.authenticated = false;
       },
       checkAuth() {
